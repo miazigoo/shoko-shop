@@ -1,0 +1,51 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Шоколадные розы{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <center class="col-md-12"><h1>{% if category %}{{ category.name }}{% else %}Шоколадные розы{% endif %}</h1></center>
+
+    <div class="card-group">
+      {% for product in products %}
+      <div class="card col-md-4" style="max-height: 500px; height:500px; margin-right:10px; background: lightgray;">
+        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="card-img-top" alt="..." style="max-height: 200px; min-height: 200px; padding-top: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description|truncatechars:120  }}</p>
+          <p class="card-text"><small class="text">₽{{ product.price }}</small></p>
+          <a class="btn btn-outline-info" href="{{ product.get_absolute_url }}" style="display: block;
+            margin-left: auto;
+            margin-right: auto">
+            <h5>Создать</h6>
+          </a>
+          <br>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+
+
+    <!--<div id="main" class="product-list">
+        <center><h1>{% if category %}{{ category.name }}{% else %}Шоколадные розы{% endif %}</h1></center>
+        {% for product in products %}
+            <div class="item">
+                <a href="{{ product.get_absolute_url }}">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                </a>
+                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                ₽{{ product.price }}
+            </div>
+        {% endfor %}
+    </div> -->
+    
+
+
+
+{% endblock %}
